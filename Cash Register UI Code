@@ -1,0 +1,85 @@
+import java.util.*;
+
+public class CashRegister 
+{
+    //Main 
+    public static void main(String args[]) 
+    {
+        //Initialize scanner object
+        Scanner scanner = new Scanner(System.in);
+
+        String userInput;
+
+            do
+            {
+                /// Cash Register UI 
+                System.out.println("Welcome to the cash register! What action would you like to take?");
+                System.out.println("A) Input Items You Want To Purchase");
+                System.out.println("B) Insert Payment for Items");
+                System.out.println("C) Quit Program");
+            
+                userInput = scanner.nextLine();
+
+
+                switch (userInput)
+                { 
+                    //Case A: Input Items want to Purchase
+                    case "a":
+
+                    /*Description of Code
+                    1. Display item type and cost from a list for a user to chose from
+                    2. Be able to input Items want to purchase and store their cost
+                    3. Be able to specify the amount of said item want to purchase (Multiple cost
+                    by amount of item want to buy)
+                    3. Calculate Total Costs of Item and then display it for the user to see 
+                    4. Store Total Cost in variable so it can be used in payment screen
+                    5. Add a final message so the user can confirm or deny amount of items and total cost at the end 
+                    before they proceed to purchase. 
+                    -If they deny final message because they made a mistake they should be redirected back to main 
+                    menu so they can reinput item amount and type.
+                    */
+                    
+                    //Test Code
+                    System.out.println("Case A has been selected");
+                    break;
+                    
+                    //Case B: Insert Payment of Items
+                    case "b": 
+                    
+                    /*Description of Code
+                    1. Ask for method of payment (Card or Cash)
+                    2. Display current total item total (reference total cost variable from case a)
+                    3. Ask user to input amount of money to put into the register 
+                    - If amount given from user = total cost: Display thank you message that the
+                    purchase has been finalized.
+                    - If amount given from user is greater that total cost: Display thank you message that the
+                    purchase has been finalized and return extra cash. 
+                    - If amount given from user is less thatn total cose: Display error message that user has
+                    insufficent funds and needs to put in more cas to finalize purchase.
+                     */
+                    
+                    //Test Code
+                    System.out.println("Case B has been selected");
+                    break;
+                    
+                    // Case C: Exiting Cash Register Program
+                    case "c":
+
+                    System.out.println("Exiting Cash Register, have a nice day!");
+
+                    break;
+                    
+                    //Invalid Input Case
+                    default: 
+
+                    System.out.println("Invalid input, please try");
+                     
+                    break;
+                } 
+
+            }while(!userInput.equals("c")); 
+            scanner.close();
+    
+    }
+
+}

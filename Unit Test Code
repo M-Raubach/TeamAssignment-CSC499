@@ -1,0 +1,24 @@
+public class unitTests {
+
+        public static void main(String args[])
+    {
+     
+        ///  Calculate Total Cost of Apple and Water Test   
+        int apple = 2;
+        int water = 3;
+
+        int totalCost = apple + water; 
+
+        System.out.println("Your total cost for items are: $" + totalCost);
+
+        // Insert Payment Test and Cashback
+        System.out.println("You Owe: " + totalCost);
+
+        int userGivenPayment = totalCost + 5;
+
+        System.out.println("You put in register: " + userGivenPayment);
+
+        System.out.println("Purchase made, your cashback is: " + (userGivenPayment-totalCost));
+
+    }
+}

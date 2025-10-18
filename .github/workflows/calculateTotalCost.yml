@@ -1,0 +1,8 @@
+name: calculateTotalCost 
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: outputTotalCost-step
+        run: echo "Your Total Cost is $5."

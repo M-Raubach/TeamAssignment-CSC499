@@ -1,0 +1,8 @@
+name: insertPaymentandCashback
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ouputMessageCashback-step
+        run: echo "Purchase made, your cashback is $5."

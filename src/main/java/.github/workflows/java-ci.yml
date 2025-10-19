@@ -1,0 +1,28 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ main, Unit-Testing ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK
+      # Temurin = OpenJDK from Eclipse Adoptium
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Build the project (quiet mode -B -q)
+      - name: Build with Maven
+        run: mvn -B -q clean package
+
+      # Run unit tests (looks for src/test/java/**)
+      - name: Run unit tests
+        run: mvn -q test

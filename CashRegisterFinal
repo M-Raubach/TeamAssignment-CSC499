@@ -1,0 +1,124 @@
+/*
+--------------------------------------------------
+ Basic Grocery Store POS System
+--------------------------------------------------
+How to use:
+- A: Add item price and quantity
+- B: Pay for items (cash only)
+- C: Manager override (discount example)
+- D: Refund example
+- E: Quit program
+
+Test examples:
+• Add items: price = 2.50, qty = 3
+• Pay: enter 10 for cash
+• Override: apples $2 + water $3, discount $2
+• Refund: $15 sale, $10 refund
+--------------------------------------------------
+*/
+
+import javax.swing.*;
+
+public class CashRegisterWithManager {
+    public static void main(String[] args) {
+        double subtotal = 0.0;
+        int items = 0;
+        double taxRate = 0.08; // 8% tax
+
+        while (true) {
+            String pick = JOptionPane.showInputDialog(
+                    null,
+                    "A) Add Items\nB) Pay\nC) Manager Override\nD) Refund\nE) Quit",
+                    "Cash Register",
+                    JOptionPane.QUESTION_MESSAGE
+            );
+            if (pick == null) break;
+            pick = pick.trim().toLowerCase();
+
+            if (pick.equals("a")) {
+                // Add items
+                String p = JOptionPane.showInputDialog(null, "Enter item price:");
+                if (p == null || p.trim().isEmpty()) continue;
+                double price = Double.parseDouble(p);
+
+                String q = JOptionPane.showInputDialog(null, "Enter quantity:");
+                if (q == null || q.trim().isEmpty()) continue;
+                int qty = Integer.parseInt(q);
+
+                subtotal += price * qty;
+                items += qty;
+                JOptionPane.showMessageDialog(null,
+                        "Added " + qty + " item(s) @ $" + price +
+                                "\nSubtotal: $" + round2(subtotal));
+
+            } else if (pick.equals("b")) {
+                // Pay
+                if (subtotal == 0) {
+                    JOptionPane.showMessageDialog(null, "No items yet.");
+                    continue;
+                }
+                double tax = round2(subtotal * taxRate);
+                double total = round2(subtotal + tax);
+                String pay = JOptionPane.showInputDialog(null,
+                        "Total due: $" + total + "\nEnter cash amount:");
+                if (pay == null || pay.trim().isEmpty()) continue;
+                double cash = Double.parseDouble(pay);
+                if (cash < total) {
+                    JOptionPane.showMessageDialog(null, "Not enough cash.");
+                    continue;
+                }
+                double change = round2(cash - total);
+                JOptionPane.showMessageDialog(null,
+                        "Payment complete!\nChange: $" + change);
+                subtotal = 0;
+                items = 0;
+
+            } else if (pick.equals("c")) {
+                // Manager Override
+                int apple = 2;
+                int water = 3;
+                int total = apple + water;
+                JOptionPane.showMessageDialog(null,
+                        "Total before override: $" + total);
+                boolean managerApproved = true;
+                int discount = 2;
+                if (managerApproved) {
+                    total = total - discount;
+                    JOptionPane.showMessageDialog(null,
+                            "Manager override applied: -$" + discount);
+                }
+                int payment = 10;
+                JOptionPane.showMessageDialog(null,
+                        "Customer pays: $" + payment +
+                                "\nChange: $" + (payment - total));
+
+            } else if (pick.equals("d")) {
+                // Refund
+                int saleTotal = 15;
+                JOptionPane.showMessageDialog(null,
+                        "Sale completed for: $" + saleTotal);
+                boolean managerApproved = true;
+                int refund = 10;
+                if (managerApproved && refund <= saleTotal) {
+                    saleTotal = saleTotal - refund;
+                    JOptionPane.showMessageDialog(null,
+                            "Refund approved: $" + refund);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Refund denied.");
+                }
+                JOptionPane.showMessageDialog(null,
+                        "Remaining balance after refund: $" + saleTotal);
+
+            } else if (pick.equals("e")) {
+                JOptionPane.showMessageDialog(null, "Goodbye.");
+                break;
+            } else {
+                JOptionPane.showMessageDialog(null, "Pick A–E only.");
+            }
+        }
+    }
+
+    static double round2(double x) {
+        return Math.round(x * 100.0) / 100.0;
+    }
+}
